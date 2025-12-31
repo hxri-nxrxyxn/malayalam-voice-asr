@@ -38,6 +38,18 @@ An easy-to-deploy, Dockerized solution for offline Malayalam Automatic Speech Re
 4.  **Access the GUI:**
     Open your browser and navigate to [http://localhost:8080](http://localhost:8080).
 
+## 🖥️ API Usage (Terminal)
+
+You can also send transcription requests directly via the terminal using `curl`:
+
+```bash
+curl http://localhost:8080/inference \
+  -H "Content-Type: multipart/form-data" \
+  -F "file=@/path/to/your/audio.mp3" \
+  -F "temperature=0.0" \
+  -F "language=ml"
+```
+
 ## ❤️ Credits & Acknowledgements
 
 This project stands on the shoulders of giants. A special thanks to:
