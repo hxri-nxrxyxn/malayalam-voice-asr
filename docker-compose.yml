@@ -6,4 +6,12 @@ services:
       - "8080:8080"
     volumes:
       - ./models:/models
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
     restart: unless-stopped
+
