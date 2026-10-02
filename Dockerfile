@@ -3,6 +3,9 @@ FROM ghcr.io/ggerganov/whisper.cpp:main-cuda
 # Set working directory
 WORKDIR /app
 
+# Ensure proper CUDA library path (bypasses broken compat layer on modern NVIDIA drivers)
+ENV LD_LIBRARY_PATH="/usr/local/cuda/lib64:/usr/lib/x86_64-linux-gnu"
+
 # Copy the custom web interface
 COPY public /app/public
 
@@ -17,9 +20,9 @@ ENTRYPOINT ["/app/server"]
 # --host: Listen on all interfaces
 # --port: Server port
 # --public: Path to static files
-# -ng: Offload layers to GPU
-# --convert: Convert non-WAV audio formats (MP3/OGG/etc.) automatically using ffmpeg
-CMD ["-m", "/models/ggml-model-q4_0.bin", "--host", "0.0.0.0", "--port", "8080", "--public", "/app/public", "-ng", "--convert"]
+CMD ["-m", "/models/ggml-model-q4_0.bin", "--host", "0.0.0.0", "--port", "8080", "--public", "/app/public"]
+
+
 
 
 
